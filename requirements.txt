@@ -10,3 +10,7 @@ torchsummary
 numpy
 wandb
 trdg
+
+pyclipper
+shapely
+pandas
