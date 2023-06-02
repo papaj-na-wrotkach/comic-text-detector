@@ -13,6 +13,7 @@ import random
 
 from numpy.random import rand
 from trdg.utils import load_dict, load_fonts
+import trdg
 from tqdm import tqdm
 import pandas as pd
 import sys
@@ -20,6 +21,7 @@ sys.path.append(os.getcwd())
 from utils.io_utils import find_all_imgs, imread, imwrite
 from utils.imgproc_utils import *
 import copy
+import inspect
 
 ALIGN_LEFT = 0
 ALIGN_CENTER = 1
@@ -167,7 +169,7 @@ class TextLinesSampler:
     def __init__(self, page_size, sampler_dict):
         self.page_w, self.page_h = page_size
         self.lang = sampler_dict['lang']
-        self.lang_dict = load_dict(lang=self.lang)
+        self.lang_dict = load_dict(os.path.join(os.path.dirname(inspect.getfile(trdg)), 'dicts', self.lang + '.txt'))
         self.orientation_sampler = ScaledSampler(sampler_dict['orientation'])
         self.numlines_sampler = ScaledSampler(sampler_dict['num_lines'])
         self.length_sampler = ScaledSampler(sampler_dict['length'])
